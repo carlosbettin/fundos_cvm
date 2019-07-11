@@ -1,9 +1,11 @@
-from fundos_cvm.cvm_scrapper import cvm_scrapper
+# from fundos_cvm.cvm_scrapper import cvm_scrapper
 from os.path import join
 from os.path import dirname
-import urllib
+from urllib.parse import urljoin
 import datetime
 
+
+import cvm_scrapper
 
 # CVM webpage
 CVM_URL = "http://dados.cvm.gov.br"
@@ -20,15 +22,15 @@ FI_DIA_SUFIX = '/dados/FI/DOC/INF_DIARIO/DADOS/'
 FI_DIA_HIST_SUFIX = '/dados/FI/DOC/INF_DIARIO/DADOS/HIST/'
 
 # Full url paths to crawl.
-FI_URL = urllib.parse.urljoin(CVM_URL, FI_DIR)
-FI_CAD_URL = urllib.parse.urljoin(CVM_URL, FI_CAD_SUFIX)
-FI_BAL_URL = urllib.parse.urljoin(CVM_URL, FI_BAL_SUFIX)
-FI_CDA_URL = urllib.parse.urljoin(CVM_URL, FI_CDA_SUFIX)
-FI_CDA_HIST_URL = urllib.parse.urljoin(CVM_URL, FI_CDA_HIST_SUFIX)
-FI_EVN_URL = urllib.parse.urljoin(CVM_URL, FI_EVN_SUFIX)
-FI_EXT_URL = urllib.parse.urljoin(CVM_URL, FI_EXT_SUFIX)
-FI_DIA_URL = urllib.parse.urljoin(CVM_URL, FI_DIA_SUFIX)
-FI_DIA_HIST_URL = urllib.parse.urljoin(CVM_URL, FI_DIA_HIST_SUFIX)
+FI_URL = urljoin(CVM_URL, FI_DIR)
+FI_CAD_URL = urljoin(CVM_URL, FI_CAD_SUFIX)
+FI_BAL_URL = urljoin(CVM_URL, FI_BAL_SUFIX)
+FI_CDA_URL = urljoin(CVM_URL, FI_CDA_SUFIX)
+FI_CDA_HIST_URL = urljoin(CVM_URL, FI_CDA_HIST_SUFIX)
+FI_EVN_URL = urljoin(CVM_URL, FI_EVN_SUFIX)
+FI_EXT_URL = urljoin(CVM_URL, FI_EXT_SUFIX)
+FI_DIA_URL = urljoin(CVM_URL, FI_DIA_SUFIX)
+FI_DIA_HIST_URL = urljoin(CVM_URL, FI_DIA_HIST_SUFIX)
 
 
 # Directory to store raw data.
@@ -67,3 +69,6 @@ def update_raw_files():
             print(dir_name)
             cvm_scrapper.rename_outofdate_files(url, dir_name, ftype, dt)
             cvm_scrapper.populate_dir(url, dir_name, ftype)
+
+
+update_raw_files()

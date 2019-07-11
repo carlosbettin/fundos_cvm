@@ -45,17 +45,6 @@ def get_page(url):
     return soup
 
 
-def get_dir_list_from_page(url, ignore=IGNORE_LIST):
-    soup = get_page(url)
-    dirs = []
-    for a_attr in soup.find_all('a'):
-        value = a_attr.get('href')
-        if value not in ignore:
-            if ("csv" or 'zip' or 'txt') not in value:
-                dirs.append(value)
-    return dirs
-
-
 def get_file_list_from_page(url, ftype='csv'):
     """Get a list of all the files of specific type from the webpage."""
     soup = get_page(url)
@@ -67,12 +56,12 @@ def get_file_list_from_page(url, ftype='csv'):
     return link_list
 
 
-def gather_files_from_page(url, ftype='csv'):
+def files_with_timestamp_from_page(url, ftype='csv'):
     """Get a list of all the files of specific type from the webpage."""
     soup = get_page(url)
     # Get tags that contain the time of last modificatin in the file.
     last_mod_tag = soup.find_all('td', {'class': 'indexcollastmod'})[1:]
-    # Return only the time string.
+    # Return only the datetime string.
     last_mod_list = [time_str_to_datetime(tag.text) for tag in last_mod_tag]
     link_list = []
     for a_attr in soup.find_all('a'):
@@ -87,7 +76,7 @@ today = datetime.date.today()
 
 
 def get_updated_files_from_page(url, ftype, dt=today):
-    f_dic = gather_files_from_page(url, ftype)
+    f_dic = files_with_timestamp_from_page(url, ftype)
     files = [f for f, d in f_dic.items() if datetime.datetime.date(d) == dt]
     return files
 
@@ -128,6 +117,6 @@ def rename_outofdate_files(url, dir_name, ftype, dt=today):
     files_to_rename = [os.path.join(dir_name, file) for file in files]
     for file_to_rename in files_to_rename:
         os.rename(
-            file_to_rename, "{}_outofdate{}.{}".format(
+            file_to_rename, "{}_outofdate{}{}".format(
                 file_to_rename[:-4], dt, ftype)
         )
