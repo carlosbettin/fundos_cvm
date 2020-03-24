@@ -11,7 +11,7 @@ FI_CAD_SUFIX = "/dados/FI/CAD/DADOS/"
 FI_DIA_SUFIX = '/dados/FI/DOC/INF_DIARIO/DADOS/'
 FI_DOC_EXTRATO_SUFIX = '/dados/FI/DOC/EXTRATO/DADOS/'
 
-RAW_DATA_DIR = join(dirname("__file__"), 'fundos_cvm', 'database', 'raw')
+RAW_DATA_DIR = join(dirname("__file__"), 'fundos_cvm', 'database', 'raw_files')
 
 FI_CAD_DIR = join(RAW_DATA_DIR, 'FI', 'FI_CAD')
 FI_DIA_DIR = join(RAW_DATA_DIR, 'FI', 'FI_DIARIO')

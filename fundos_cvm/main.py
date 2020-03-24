@@ -5,12 +5,14 @@ from urllib.parse import urljoin
 import datetime
 
 
-import cvm_scrapper
+from fundos_cvm import cvm_scrapper
+
+# TODO(get fundos estruturados )
 
 # CVM webpage
 CVM_URL = "http://dados.cvm.gov.br"
 
-# Database to crawl
+# Databases to crawl
 FI_DIR = "/dados/FI/"
 FI_CAD_SUFIX = "/dados/FI/CAD/DADOS/"
 FI_BAL_SUFIX = '/dados/FI/DOC/BALANCETE/DADOS/'
@@ -34,7 +36,7 @@ FI_DIA_HIST_URL = urljoin(CVM_URL, FI_DIA_HIST_SUFIX)
 
 
 # Directory to store raw data.
-RAW_DATA_DIR = join(dirname("__file__"), 'fundos_cvm', 'database', 'raw')
+RAW_DATA_DIR = join(dirname("__file__"), 'fundos_cvm', 'database', 'raw_files')
 
 # Create directories for each page.
 FI_CAD_DIR = join(RAW_DATA_DIR, 'FI', 'CAD')
@@ -62,12 +64,13 @@ F_TYPES = ['.csv', '.txt', '.zip']
 
 
 def update_raw_files():
+    """Get all files from all mapped URL (URL_DIR_MAP) in CVM."""
     dt = datetime.date.today()
     for url, dir_name in URL_DIR_MAP.items():
         for ftype in F_TYPES:
             print(url)
             print(dir_name)
-            cvm_scrapper.rename_outofdate_files(url, dir_name, ftype, dt)
+            cvm_scrapper.rename_out_of_date_files(url, dir_name, ftype, dt)
             cvm_scrapper.populate_dir(url, dir_name, ftype)
 
 

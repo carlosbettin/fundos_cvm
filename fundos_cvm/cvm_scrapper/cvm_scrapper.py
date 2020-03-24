@@ -59,7 +59,7 @@ def get_file_list_from_page(url, ftype='csv'):
 def files_with_timestamp_from_page(url, ftype='csv'):
     """Get a list of all the files of specific type from the webpage."""
     soup = get_page(url)
-    # Get tags that contain the time of last modificatin in the file.
+    # Get tags with the time of last modificatin in the file.
     last_mod_tag = soup.find_all('td', {'class': 'indexcollastmod'})[1:]
     # Return only the datetime string.
     last_mod_list = [time_str_to_datetime(tag.text) for tag in last_mod_tag]
@@ -104,6 +104,7 @@ def populate_dir(url, dir_name, ftype='csv'):
     return
 
 
+
 def list_files_to_update(url, dir_name, ftype, dt=today):
     """Get a list of files in directory that are out of date."""
     dir_files = os.listdir(dir_name)
@@ -111,7 +112,8 @@ def list_files_to_update(url, dir_name, ftype, dt=today):
     return list(set(dir_files) & set(new_files))
 
 
-def rename_outofdate_files(url, dir_name, ftype, dt=today):
+
+def rename_out_of_date_files(url, dir_name, ftype, dt=today):
     """Rename files that are out of date."""
     files = list_files_to_update(url, dir_name, ftype, dt)
     files_to_rename = [os.path.join(dir_name, file) for file in files]
