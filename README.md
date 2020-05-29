@@ -7,8 +7,8 @@ Create a directory called `fundos_cvm` and clone the repository in it.
 
 ```
 mkdir wright_bi
-git clone https://github.com/carlosbettin/wright_bi.git wright_bi
-cd wright_bi
+git clone https://github.com/carlosbettin/fundos_cvm.git fundos_cvm
+cd fundos_cvm
 ```
 
 ## Creating Virtual Environment
