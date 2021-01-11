@@ -6,7 +6,7 @@
 Create a directory called `fundos_cvm` and clone the repository in it.
 
 ```
-mkdir wright_bi
+mkdir fundos_cvm
 git clone https://github.com/carlosbettin/fundos_cvm.git fundos_cvm
 cd fundos_cvm
 ```
